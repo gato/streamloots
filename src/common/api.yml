@@ -1,4 +1,3 @@
-#swagger: "2.0"
 openapi: 3.0.0
 
 components:
@@ -15,9 +14,7 @@ info:
   version: 0.1.0
   title: streamloots
   description: Streamloots Card API
-#basePath: /api/v1
-servers:
-  - url: /api/v1
+
 tags:
   - name: Cards
     description: Streamloots card API
@@ -56,7 +53,7 @@ definitions:
         type: boolean
         example: true
 paths:
-  /cards:
+  /api/v1/cards:
     get:
       tags:
         - Cards
@@ -64,22 +61,31 @@ paths:
       responses:
         200:
           description: Returns all cards
+        401:
+          description: Unauthorized          
+        403:
+          description: Forbidden            
     post:
       tags:
         - Cards
       description: Create a new card
-      parameters:
-        - name: card
-          in: body
-          description: a card
-          required: true
-          schema: 
-            $ref: "#/definitions/CardBody"
+      requestBody:
+        description: Card to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/CardBody'
       responses:
         201:
           description: Returns created card
+        401:
+          description: Unauthorized          
+        403:
+          description: Forbidden            
 
-  /cards/{id}:
+
+  /api/v1/cards/{id}:
     get:
       tags:
         - Cards
@@ -94,8 +100,13 @@ paths:
           description: Return the card with the specified id
         404:
           description: Example not found
+        401:
+          description: Unauthorized          
+        403:
+          description: Forbidden            
 
-  /spec:
+
+  /api/v1/spec:
     get:
       tags:
         - Specification

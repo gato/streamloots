@@ -53,6 +53,9 @@ export class MongoCardRepository implements CardRepository {
     public async get(user: string, id: string): Promise<Card> {
         const db = await this.getDB();
         const card: MongoCard = await db.collection('cards').findOne({ id });
+        if (card === null) {
+            return null;
+        }
         // TODO: calculate owned and used
         const used = 0;
         const owned = 0;
@@ -63,7 +66,16 @@ export class MongoCardRepository implements CardRepository {
         const db = await this.getDB();
         const cards: MongoCard[] = await db
             .collection('cards')
-            .find({})
+            .find({
+                $or: [
+                    {
+                        owner: user,
+                    },
+                    {
+                        published: true,
+                    },
+                ],
+            })
             .toArray();
         return cards.map((c) => {
             // TODO: calculate owned and used
@@ -82,7 +94,7 @@ export class MongoCardRepository implements CardRepository {
     public async save(user: string, card: Card): Promise<Card> {
         const db = await this.getDB();
         const c: MongoCard = this.card2MongoCard(card);
-        await db.collection('cards').updateOne({ id: c.id }, c);
+        await db.collection('cards').updateOne({ id: c.id }, { $set: c });
         // TODO: calculate owned and used
         const used = 0;
         const owned = 0;

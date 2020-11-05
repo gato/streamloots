@@ -9,11 +9,11 @@ export class DummyAnalytics implements AnalyticsRepository {
     }
 
     cardCreated(card: Card): boolean {
-        l.info(`[${this.name}] card ${card} created`);
+        l.info(`[${this.name}] card ${card.name} created\n`);
         return true;
     }
     cardPublished(card: Card): boolean {
-        l.info(`[${this.name}] card ${card} published`);
+        l.info(`[${this.name}] card ${card.name} published\n`);
         return true;
     }
 }

@@ -10,5 +10,14 @@ export default (cardInteractor: CardInteractor) => {
         .get(
             '/:id',
             controller.getById.bind(controller.getById, cardInteractor)
+        )
+        .put('/:id', controller.update.bind(controller.update, cardInteractor))
+        .post(
+            '/publish',
+            controller.publish.bind(controller.publish, cardInteractor)
+        )
+        .post(
+            '/unpublish',
+            controller.unpublish.bind(controller.unpublish, cardInteractor)
         );
 };
