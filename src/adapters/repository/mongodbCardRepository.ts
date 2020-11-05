@@ -14,12 +14,24 @@ interface MongoCard {
 }
 
 export class MongoCardRepository implements CardRepository {
+    hostname: string;
+    port: number;
+    client: any;
+
+    constructor(hostname: string, port: number) {
+        this.hostname = hostname;
+        this.port = port;
+        this.client = null;
+    }
     private async getDB() {
-        const url = 'mongodb://localhost:27017';
-        const client = await MongoClient.connect(url, {
-            useUnifiedTopology: true,
-        });
-        return client.db('streamloots');
+        // const url = `mongodb://localhost:27017`;
+        const url = `mongodb://${this.hostname}:${this.port}`;
+        if (this.client === null) {
+            this.client = await MongoClient.connect(url, {
+                useUnifiedTopology: true,
+            });
+        }
+        return this.client.db('streamloots');
     }
 
     private mongoCard2Card(card: MongoCard, used: number, owned: number): Card {

@@ -11,3 +11,15 @@ services:
     hostname: mongoclient
     ports:
       - 3300:3000
+  streamloots:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: streamloots
+    depends_on:
+      - mongo    
+    environment:
+      MONGODB_PORT: 27017
+      MONGODB_HOST: mongo
+    ports:
+      - 3000:3000
