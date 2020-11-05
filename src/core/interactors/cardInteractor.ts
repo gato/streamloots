@@ -34,7 +34,7 @@ export default class CardInteractor {
         if (!this.isValid(card, false)) {
             throw new Error('Required fields are missing');
         }
-        card.id = uuidv4().replace('-', '');
+        card.id = uuidv4().replace(/-/g, '');
         card.owner = user;
         const c = await this.cardRepository.create(user, card);
         this.analytics.forEach((a) => a.cardCreated(c));
