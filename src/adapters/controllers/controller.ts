@@ -6,7 +6,7 @@ import status from 'http-status';
 const errorMapper = {
     'Required fields are missing': status.BAD_REQUEST,
     'card not found': status.NOT_FOUND,
-    "You can't update other's people cards": status.FORBIDDEN,
+    "You can't update other people's cards": status.FORBIDDEN,
 };
 const mapError = (s) => {
     return errorMapper[s] || status.INTERNAL_SERVER_ERROR;

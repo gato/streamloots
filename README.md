@@ -13,8 +13,6 @@ npm install
 # run in development mode
 npm run dev
 
-# run tests
-npm run test
 ```
 
 ---
@@ -56,20 +54,6 @@ npm run compile
 npm start
 ```
 
-## Test It
-
-Run the Mocha unit tests
-
-```shell
-npm test
-```
-
-or debug them
-
-```shell
-npm run test:debug
-```
-
 ## Try It
 * Open you're browser to [http://localhost:3000](http://localhost:3000)
 * Invoke the `/cards` endpoint 
@@ -84,10 +68,4 @@ npm run test:debug
 
 ```
 npm run dev:debug
-```
-
-#### Debug Tests
-
-```
-npm run test:debug
 ```

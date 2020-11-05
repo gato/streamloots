@@ -83,6 +83,8 @@ export default class CardInteractor {
 
     public async publish(user: string, ids: Array<string>): Promise<boolean> {
         // TODO: maybe this should be done more eficiently in other level (like repository, but is business logic so it should be here)
+        // also probably asyncronosly as it may take a while.
+
         // retrieve all cards
         let cards = await Promise.all(
             ids.map((id) => this.cardRepository.get(user, id))
@@ -118,6 +120,8 @@ export default class CardInteractor {
 
     public async unpublish(user: string, ids: Array<string>): Promise<boolean> {
         // TODO: maybe this should be done more eficiently in other level (like repository, but is business logic so it should be here)
+        // also probably asyncronosly as it may take a while.
+
         // retrieve all cards
         let cards = await Promise.all(
             ids.map((id) => this.cardRepository.get(user, id))
