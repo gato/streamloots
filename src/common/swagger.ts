@@ -2,6 +2,7 @@ import path from 'path';
 import middleware from 'swagger-express-middleware';
 import { Application } from 'express';
 import errorHandler from '../api/middlewares/error.handler';
+import authenticateToken from './jwt';
 
 export default function (
     app: Application,
@@ -41,8 +42,8 @@ export default function (
             );
 
             // These two middleware don't have any options (yet)
-            app.use(middleware.CORS(), middleware.validateRequest());
-
+            app.use(middleware.CORS() /*, middleware.validateRequest()*/);
+            app.use(authenticateToken);
             routes(app);
 
             // eslint-disable-next-line no-unused-vars, no-shadow

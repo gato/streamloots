@@ -8,6 +8,8 @@ import l from './logger';
 
 import installValidator from './swagger';
 
+import authenticateToken from './jwt';
+
 const app = express();
 
 export default class ExpressServer {
@@ -29,6 +31,7 @@ export default class ExpressServer {
         );
         app.use(cookieParser(process.env.SESSION_SECRET));
         app.use(express.static(`${root}/public`));
+        // app.use(authenticateToken);
     }
 
     router(routes: (app: Application) => void): ExpressServer {
