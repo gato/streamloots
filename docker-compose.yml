@@ -12,6 +12,7 @@ services:
     ports:
       - 3300:3000
   streamloots:
+    container_name: streamloots
     build:
       context: .
       dockerfile: Dockerfile
