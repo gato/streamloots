@@ -5,8 +5,8 @@ info:
   description: Streamloots Card API
 basePath: /api/v1
 tags:
-  - name: Examples
-    description: Simple example endpoints
+  - name: Cards
+    description: Streamloots card API
   - name: Specification
     description: The swagger API specification
 
@@ -17,53 +17,68 @@ produces:
 
 
 definitions:
-  ExampleBody:
+  CardBody:
     type: object
-    title: example
-    required:
-      - name
+    title: card
     properties:
+      id:
+        type: string
+        example: fe3f7471e8174b86999c32c0288f7e4e
       name:
         type: string
-        example: no_stress
-
+        example: Thor
+      owner:
+        type: string
+        example: 5a50159308f5a800111de759
+      image:
+        type: string
+        example: file.jpg
+      limit:
+        type: number
+        example: 10
+      rarity: 
+        type: string
+        example: Rare
+      published:
+        type: boolean
+        example: true
 paths:
-  /examples:
+  /cards:
     get:
       tags:
-        - Examples
-      description: Fetch all examples
+        - Cards
+      description: Fetch all cards
       responses:
         200:
-          description: Returns all examples
+          description: Returns all cards
     post:
       tags:
-        - Examples
-      description: Create a new example
+        - Cards
+      description: Create a new card
       parameters:
-        - name: example
+        - name: card
           in: body
-          description: an example
+          description: a card
           required: true
           schema: 
-            $ref: "#/definitions/ExampleBody"
+            $ref: "#/definitions/CardBody"
       responses:
-        200:
-          description: Returns all examples
+        201:
+          description: Returns created card
 
-  /examples/{id}:
+  /cards/{id}:
     get:
       tags:
-        - Examples
+        - Cards
       parameters:
         - name: id
           in: path
           required: true
-          description: The id of the example to retrieve
-          type: integer
+          description: The id of the card to retrieve
+          type: string
       responses:
         200:
-          description: Return the example with the specified id
+          description: Return the card with the specified id
         404:
           description: Example not found
 
